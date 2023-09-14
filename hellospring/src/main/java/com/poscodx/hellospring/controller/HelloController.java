@@ -15,8 +15,6 @@ public class HelloController {
 
 	}
 }
-
-
 /*
 	경로 : http://localhost:8080/hellospring/hello
 */
