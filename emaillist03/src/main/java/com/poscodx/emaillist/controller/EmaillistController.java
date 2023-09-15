@@ -33,10 +33,9 @@ public class EmaillistController {
 
 		return "main"; // main.jsp
 	}
-
+	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String add(){
-		System.out.println("add test");
 		return "add"; // add.jsp
 	}
 

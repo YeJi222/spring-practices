@@ -1,5 +1,5 @@
 <%@page import="com.poscodx.guestbook.vo.GuestBookVo"%>
-<%@page import="com.poscodx.guestbook.dao.GuestBookDao"%>
+<%@page import="com.poscodx.guestbook.repository.GuestBookRepository"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -11,7 +11,7 @@
 <title>방명록</title>
 </head>
 <body>
-	<form action="/guestbook02/gb" method="post">
+	<form action="/guestbook03/add" method="post">
 		<input type="hidden" name="a" value="add">
 		<table border=1 width=500>
 			<tr>
