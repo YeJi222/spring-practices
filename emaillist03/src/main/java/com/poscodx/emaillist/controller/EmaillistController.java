@@ -15,33 +15,35 @@ public class EmaillistController {
 	@Autowired
 	private EmaillistRepository emaillistRepository;
 
+
+	/* http://localhost:8080/emaillist03/
 	@ResponseBody
 	@RequestMapping("/")
 	public String main() {
 		System.out.println("test");
 		return "ok!";
 	}
+	 */
 
-	/*
+	// http://localhost:8080/emaillist03/
 	@RequestMapping("/")
 	public String main(Model model) {
 		List<EmaillistVo> list = emaillistRepository.findAll();
 		model.addAttribute("list", list);
 
-		return "main";
+		return "main"; // main.jsp
 	}
-	 */
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String add(){
-		System.out.println("test");
-		return "add";
+		System.out.println("add test");
+		return "add"; // add.jsp
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(EmaillistVo vo){
 		emaillistRepository.insert(vo);
-		return "redirect:/";
+		return "redirect:/"; // go to main.jsp
 	}
 
 }
