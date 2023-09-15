@@ -1,18 +1,18 @@
-package com.poscodx.guestbook.dao;
+package com.poscodx.guestbook.repository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.poscodx.guestbook.vo.GuestBookVo;
+import org.springframework.stereotype.Repository;
 
-public class GuestBookDao {
+@Repository
+public class GuestBookRepository {
 	public List<GuestBookVo> findAll() {
 		List<GuestBookVo> result = new ArrayList<>();
 		
