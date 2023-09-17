@@ -8,13 +8,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.poscodx.guestbook.vo.GuestBookVo;
+import com.poscodx.guestbook.vo.GuestbookVo;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class GuestBookRepository {
-	public List<GuestBookVo> findAll() {
-		List<GuestBookVo> result = new ArrayList<>();
+public class GuestbookRepository {
+	public List<GuestbookVo> findAll() {
+		List<GuestbookVo> result = new ArrayList<>();
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -23,38 +23,31 @@ public class GuestBookRepository {
 		try {
 			conn = getConnection();
 
-			//3. SQL 준비
 			String sql = "select * from guestbook order by no desc";
 			pstmt = conn.prepareStatement(sql);
-			
-			//4. binding
-			
-			//5. SQL 실행
 			rs = pstmt.executeQuery();
-			
-			//6. 결과 처리
+
 			while(rs.next()) {
 				Long no = rs.getLong(1);
 				String name = rs.getString(2);
 				String password = rs.getString(3);
 				String contents = rs.getString(4);
-				String reg_date = rs.getString(5);
+				String regDate = rs.getString(5);
 				
-				GuestBookVo vo = new GuestBookVo();
+				GuestbookVo vo = new GuestbookVo();
 				vo.setNo(no);
 				vo.setName(name);
 				vo.setPassword(password);
 				vo.setContents(contents);
-				vo.setReg_date(reg_date.substring(0, 10));
+				// vo.setRegDate(regDate.substring(0, 10));
+				vo.setRegDate(regDate);
 				
 				result.add(vo);
 			}
-			
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		} finally {
 			try {
-				// 7. 자원정리
 				if(rs != null) {
 					rs.close();
 				}
@@ -72,12 +65,18 @@ public class GuestBookRepository {
 		return result;
 	}
 
-	public void insert(GuestBookVo vo) {
+	public Boolean insert(GuestbookVo vo) {
+		boolean result = false;
+
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
 		try {
 			conn = getConnection();
+
+			String setTime = "SET time_zone='+09:00';";
+			pstmt = conn.prepareStatement(setTime);
+			pstmt.executeQuery();
 			
 			String sql = "insert into guestbook(name, password, contents, reg_date) values(?, ?, ?, now())";
 			pstmt = conn.prepareStatement(sql);
@@ -86,7 +85,8 @@ public class GuestBookRepository {
 			pstmt.setString(2, vo.getPassword());
 			pstmt.setString(3, vo.getContents());
 			
-			pstmt.executeQuery();
+			int count = pstmt.executeUpdate();
+			result = count == 1;
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		} finally {
@@ -101,9 +101,12 @@ public class GuestBookRepository {
 				e.printStackTrace();
 			}
 		}
+		return result;
 	}
 
-	public void deleteByPassword(long no, String password) {
+	public Boolean deleteByNoAndPassword(long no, String password) {
+		boolean result = false;
+
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
@@ -115,7 +118,8 @@ public class GuestBookRepository {
 			pstmt.setLong(1, no);
 			pstmt.setString(2, password);
 		
-			pstmt.executeQuery();
+			int count = pstmt.executeUpdate();
+			result = count == 1;
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		} finally {
@@ -129,7 +133,8 @@ public class GuestBookRepository {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}		
+		}
+		return result;
 	}
 	
 	private Connection getConnection() throws SQLException {
