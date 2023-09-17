@@ -24,19 +24,19 @@ public class GuestbookController {
 		return "main";
 	}
 
-	@RequestMapping("/add")
+	@RequestMapping("/add") // add action
 	public String add(GuestbookVo vo) {
 		guestbookRepository.insert(vo);
 		return "redirect:/";
 	}
 
-	@RequestMapping(value="/delete/{no}", method=RequestMethod.GET)
+	@RequestMapping(value="/delete/{no}", method=RequestMethod.GET) // delete form
 	public String delete(@PathVariable("no") Long no, Model model) {
 		model.addAttribute("no", no);
 		return "delete";
 	}
 
-	@RequestMapping(value="/delete/{no}", method=RequestMethod.POST)
+	@RequestMapping(value="/delete/{no}", method=RequestMethod.POST) // delete action
 	public String delete(@PathVariable("no") Long no, @RequestParam(value="password", required=true, defaultValue="") String password) {
 		guestbookRepository.deleteByNoAndPassword(no, password);
 		return "redirect:/";
