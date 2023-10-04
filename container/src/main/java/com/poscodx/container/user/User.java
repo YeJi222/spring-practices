@@ -1,11 +1,15 @@
 package com.poscodx.container.user;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 @Component
 public class User {
 	private Long no = 0L;
 	private String name = "둘리";
+	private Friend friend = null;
+	private List<String> friends;
 	
 	public User() {
 	}
@@ -31,8 +35,16 @@ public class User {
 		this.name = name;
 	}
 	
+	public void setFriend(Friend friend) {
+		this.friend = friend;
+	}
+	
+	public void setFriends(List<String> friends) {
+		this.friends = friends;
+	}
+	
 	@Override
 	public String toString() {
-		return "User [no=" + no + ", name=" + name + "]";
+		return "User [no=" + no + ", name=" + name + ", friend=" + friend + ", friends=" + friends + "]";
 	}
 }
