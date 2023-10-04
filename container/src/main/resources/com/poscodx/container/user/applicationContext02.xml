@@ -12,5 +12,32 @@
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
         http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 	
+	<!-- 기본 생성자로 빈 생성하기 -->
 	<bean id="user" name="usr" class="com.poscodx.container.user.User" />
+	
+	<!-- 파라미터 1개인 생성자로 빈 생성하기 -->
+	<bean id="user2" class="com.poscodx.container.user.User" >
+		<constructor-arg value="마이콜" />
+	</bean>
+	
+	<!-- 파라미터 2개인 생성자로 빈 생성하I -->
+	<bean id="user3" class="com.poscodx.container.user.User" >
+		<constructor-arg value="3" />
+		<constructor-arg value="또치" />
+	</bean>
+	
+	<!-- 파라미터 2개인 생성자로 빈 생성하기II -->
+	<bean id="user4" class="com.poscodx.container.user.User" >
+		<constructor-arg index="1" value="도우너" />
+		<constructor-arg index="0" value="4" />
+	</bean>
+	
+	<!-- setter 사용하기 -->
+	<bean id="user5" class="com.poscodx.container.user.User" >
+		<constructor-arg name="no" value="5" />
+		<constructor-arg name="name" value="길동" />
+	</bean>
+	
+	<!-- DI 하기 -->
+	<bean id="friend" class="com.poscodx.container.user.Friend" />
 </beans>
