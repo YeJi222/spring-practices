@@ -20,7 +20,7 @@
 		<constructor-arg value="마이콜" />
 	</bean>
 	
-	<!-- 파라미터 2개인 생성자로 빈 생성하I -->
+	<!-- 파라미터 2개인 생성자로 빈 생성하기I -->
 	<bean id="user3" class="com.poscodx.container.user.User" >
 		<constructor-arg value="3" />
 		<constructor-arg value="또치" />
