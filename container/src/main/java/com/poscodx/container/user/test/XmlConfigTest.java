@@ -78,7 +78,7 @@ public class XmlConfigTest {
 
 	private static void testBeanFactory02() {
 		BeanFactory bf = new XmlBeanFactory(new ClassPathResource("com/poscodx/container/config/user/applicationContext02.xml"));
-		User user = bf.getBean(User.class);
+		User user = bf.getBean("user", User.class);
 		System.out.println(user.getName());
 	}
 
