@@ -36,7 +36,8 @@
 		 
 [src/test/java]
 	com.poscodx.container.videosystem
-		| -- DVDPlayerJavaConfigTest
+		| -- DVDPlayerJavaConfigTest.java
+		| -- DVDPlayerXmlConfigTest.java
 	com.poscodx.container.soundsystem
 		|-- CDPlayerXmlConfigTest.java
 		|-- CDPlayerJavaConfigTest.java
